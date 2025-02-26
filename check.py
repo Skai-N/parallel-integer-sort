@@ -7,7 +7,7 @@ import time
 
 def main():
     DEFAULT_NUM_INTS = 100_000
-    DEFAULT_PROGRAM = "sort/sort_numbers"
+    DEFAULT_PROGRAM = "sort/sort.java"
 
     if len(sys.argv) > 1:
         try:
@@ -32,7 +32,7 @@ def main():
     start_time = time.time()
 
     process = subprocess.Popen(
-        [program],
+        ["java", program],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -53,7 +53,7 @@ def main():
         output_ints = []
     else:
         output_ints = list(map(int, output_str.split()))
-    
+
     if sorted(original_ints) == output_ints:
         print("SUCCESS: Output is sorted correctly and contains the same elements.")
     else:
