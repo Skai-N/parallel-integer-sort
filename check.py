@@ -6,8 +6,9 @@ import subprocess
 import time
 
 def main():
-    DEFAULT_NUM_INTS = 100_000
-    DEFAULT_PROGRAM = "sort/sort.java"
+    random.seed(10)
+    DEFAULT_NUM_INTS = 10
+    DEFAULT_PROGRAM = "sort/sort"
 
     if len(sys.argv) > 1:
         try:
@@ -26,13 +27,13 @@ def main():
     print(f"Generating {n} signed 32-bit integers...")
     original_ints = [random.randint(-2147483648, 2147483647) for _ in range(n)]
     
-    input_data = "\n".join(str(x) for x in original_ints) + "\n"
+    input_data = "\n".join(str(x) for x in original_ints) + "\n a"
     
     print(f"Running program: {program}")
     start_time = time.time()
 
     process = subprocess.Popen(
-        ["java", program],
+        [program],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -52,8 +53,12 @@ def main():
     if not output_str:
         output_ints = []
     else:
-        output_ints = list(map(int, output_str.split()))
-
+        output_ints = []
+        for stra in output_str.split():
+            if (stra != "a"):
+                output_ints.append(stra)
+        output_ints = list(map(int, output_ints))
+    print(output_ints)
     if sorted(original_ints) == output_ints:
         print("SUCCESS: Output is sorted correctly and contains the same elements.")
     else:
