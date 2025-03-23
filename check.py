@@ -7,7 +7,7 @@ import time
 
 def main():
     random.seed(10)
-    DEFAULT_NUM_INTS = 10
+    DEFAULT_NUM_INTS = 1_000_000
     DEFAULT_PROGRAM = "sort/sort"
 
     if len(sys.argv) > 1:
@@ -27,7 +27,7 @@ def main():
     print(f"Generating {n} signed 32-bit integers...")
     original_ints = [random.randint(-2147483648, 2147483647) for _ in range(n)]
     
-    input_data = "\n".join(str(x) for x in original_ints) + "\n a"
+    input_data = "\n".join(str(x) for x in original_ints)
     
     print(f"Running program: {program}")
     start_time = time.time()
@@ -55,10 +55,10 @@ def main():
     else:
         output_ints = []
         for stra in output_str.split():
-            if (stra != "a"):
-                output_ints.append(stra)
+            output_ints.append(stra)
         output_ints = list(map(int, output_ints))
-    print(output_ints)
+
+
     if sorted(original_ints) == output_ints:
         print("SUCCESS: Output is sorted correctly and contains the same elements.")
     else:
