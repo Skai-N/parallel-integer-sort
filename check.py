@@ -7,7 +7,7 @@ import time
 
 def main():
     random.seed(10)
-    DEFAULT_NUM_INTS = 1_000_000
+    DEFAULT_NUM_INTS = 10_000_000
     DEFAULT_PROGRAM = "sort/sort"
 
     if len(sys.argv) > 1:
@@ -57,7 +57,6 @@ def main():
         for stra in output_str.split():
             output_ints.append(stra)
         output_ints = list(map(int, output_ints))
-
 
     if sorted(original_ints) == output_ints:
         print("SUCCESS: Output is sorted correctly and contains the same elements.")
